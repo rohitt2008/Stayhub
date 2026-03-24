@@ -11,6 +11,9 @@ storeRouter.get("/bookings", storeController.getBookings);
 storeRouter.get("/favourites", storeController.getFavouriteList);
 
 storeRouter.get("/homes/:homeId", storeController.getHomeDetails);
+storeRouter.get("/homes/:homeId/reserve", storeController.getReserveHome);
+storeRouter.post("/bookings", storeController.postCreateBooking);
+storeRouter.post("/bookings/delete/:bookingId", storeController.postCancelBooking);
 storeRouter.post("/favourites", storeController.postAddToFavourite);
 storeRouter.post("/favourites/delete/:homeId", storeController.postRemoveFromFavourite);
 storeRouter.get("/rules/:homeId", storeController.getHouseRules);

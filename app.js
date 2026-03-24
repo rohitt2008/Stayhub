@@ -1,4 +1,5 @@
 // Core Module
+require('dotenv').config();
 const path = require('path');
 
 // External Module

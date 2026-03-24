@@ -1,0 +1,78 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gray-50">
+  <%- include('../partials/nav') %>
+
+  <main class="container max-w-3xl px-4 py-10 mx-auto">
+    <a href="/homes/<%= home._id %>" class="text-sm font-semibold text-gray-600 hover:underline">
+      &larr; Back to home details
+    </a>
+
+    <section class="p-6 mt-4 bg-white shadow-sm rounded-2xl">
+      <h1 class="text-2xl font-bold text-gray-900">Reserve <%= home.houseName %></h1>
+      <p class="mt-1 text-gray-600"><%= home.location %> - $<%= home.price %> / night</p>
+
+      <% if (errors && errors.length > 0) { %>
+        <div class="p-4 mt-4 text-red-700 border border-red-200 rounded-lg bg-red-50">
+          <ul class="ml-5 list-disc">
+            <% errors.forEach(error => { %>
+              <li><%= error %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/bookings" method="POST" class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-2">
+        <input type="hidden" name="homeId" value="<%= home._id %>">
+
+        <div>
+          <label for="checkInDate" class="block mb-1 text-sm font-semibold text-gray-700">Check-in date</label>
+          <input
+            id="checkInDate"
+            name="checkInDate"
+            type="date"
+            value="<%= oldInput && oldInput.checkInDate ? oldInput.checkInDate : '' %>"
+            required
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300"
+          />
+        </div>
+
+        <div>
+          <label for="checkOutDate" class="block mb-1 text-sm font-semibold text-gray-700">Check-out date</label>
+          <input
+            id="checkOutDate"
+            name="checkOutDate"
+            type="date"
+            value="<%= oldInput && oldInput.checkOutDate ? oldInput.checkOutDate : '' %>"
+            required
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300"
+          />
+        </div>
+
+        <div class="md:col-span-2">
+          <label for="guests" class="block mb-1 text-sm font-semibold text-gray-700">Guests</label>
+          <input
+            id="guests"
+            name="guests"
+            type="number"
+            min="1"
+            max="20"
+            value="<%= oldInput && oldInput.guests ? oldInput.guests : 1 %>"
+            required
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300"
+          />
+        </div>
+
+        <div class="md:col-span-2">
+          <button
+            type="submit"
+            class="w-full px-4 py-3 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600"
+          >
+            Confirm Booking
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

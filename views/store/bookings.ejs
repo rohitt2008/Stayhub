@@ -1,10 +1,44 @@
 <%- include('../partials/head') %>
   </head>
-  <body>
+  <body class="bg-gray-50">
     <%- include('../partials/nav') %>
-    <main class="container mx-auto mt-20 text-center">
-      <h2 class="text-6xl font-bold text-red-500 mb-4">My Bookings</h2>
-      <p class="text-2xl text-gray-700 mb-8">Bookings will appear here</p>
+    <main class="container max-w-5xl px-4 py-12 mx-auto">
+      <h1 class="mb-6 text-4xl font-bold text-red-500">My Bookings</h1>
+
+      <% if (!bookings || bookings.length === 0) { %>
+        <div class="p-8 text-center bg-white shadow-sm rounded-2xl">
+          <p class="mb-4 text-lg text-gray-600">No bookings yet.</p>
+          <a href="/homes" class="px-5 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600">
+            Explore Homes
+          </a>
+        </div>
+      <% } else { %>
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <% bookings.forEach(booking => { %>
+            <article class="overflow-hidden bg-white shadow-sm rounded-2xl">
+              <img src="<%= booking.home && booking.home.photo %>" alt="<%= booking.home && booking.home.houseName %>" class="object-cover w-full h-48">
+              <div class="p-5">
+                <h2 class="text-xl font-bold text-gray-900"><%= booking.home && booking.home.houseName %></h2>
+                <p class="mt-1 text-sm text-gray-500"><%= booking.home && booking.home.location %></p>
+                <div class="mt-4 space-y-1 text-sm text-gray-700">
+                  <p><span class="font-semibold">Check-in:</span> <%= new Date(booking.checkInDate).toDateString() %></p>
+                  <p><span class="font-semibold">Check-out:</span> <%= new Date(booking.checkOutDate).toDateString() %></p>
+                  <p><span class="font-semibold">Guests:</span> <%= booking.guests %></p>
+                  <p><span class="font-semibold">Total:</span> $<%= booking.totalPrice %></p>
+                </div>
+                <form action="/bookings/delete/<%= booking._id %>" method="POST" class="mt-4">
+                  <button
+                    type="submit"
+                    class="px-4 py-2 text-sm font-semibold text-white bg-gray-800 rounded-lg hover:bg-gray-900"
+                  >
+                    Cancel Booking
+                  </button>
+                </form>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      <% } %>
     </main>
   </body>
 </html>
