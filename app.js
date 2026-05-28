@@ -49,6 +49,23 @@ app.use((req, res, next) => {
   next();
 })
 
+app.get('/health', (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? 'CONNECTED' : 'DISCONNECTED';
+  if (dbStatus === 'CONNECTED') {
+    res.status(200).json({
+      status: 'UP',
+      database: dbStatus,
+      timestamp: new Date()
+    });
+  } else {
+    res.status(503).json({
+      status: 'DOWN',
+      database: dbStatus,
+      timestamp: new Date()
+    });
+  }
+});
+
 app.use(authRouter)
 app.use(storeRouter);
 app.use("/host", (req, res, next) => {
@@ -63,13 +80,14 @@ app.use("/host", hostRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = 3003;
+const PORT = process.env.PORT || 3003;
+
+app.listen(PORT, () => {
+  console.log(`Server running on address http://localhost:${PORT}`);
+});
 
 mongoose.connect(DB_PATH).then(() => {
   console.log('Connected to Mongo');
-  app.listen(PORT, () => {
-    console.log(`Server running on address http://localhost:${PORT}`);
-  });
 }).catch(err => {
   console.log('Error while connecting to Mongo: ', err);
 });
