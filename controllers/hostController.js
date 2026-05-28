@@ -6,6 +6,7 @@ exports.getAddHome = (req, res, next) => {
     pageTitle: "Add Home to StayHub",
     currentPage: "addHome",
     editing: false,
+    home: null,
     isLoggedIn: req.isLoggedIn, 
     user: req.session.user,
   });
