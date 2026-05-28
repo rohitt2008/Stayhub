@@ -1,6 +1,6 @@
 # StayHub 🏡
 
-**StayHub** is a full-stack Airbnb-style booking platform built with  
+**StayHub** is a full-stack StayHub-style booking platform built with  
 **Node.js, Express, MongoDB, EJS, and Tailwind CSS**.
 
 It supports **authentication, session-based login, host & guest roles,
@@ -65,7 +65,7 @@ home listings, favourites, bookings, and file uploads**.
 
 ## 📂 Project Structure
 
-airbnb/
+StayHub/
 ├── controllers/
 ├── middleware/
 ├── models/

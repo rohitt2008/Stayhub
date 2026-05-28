@@ -7,7 +7,7 @@ const express = require('express');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const multer = require('multer');
-const DB_PATH = "mongodb+srv://root:root@airbnb.b9ll1gr.mongodb.net/airbnb?appName=airbnb";
+const DB_PATH = "mongodb+srv://root:root@airbnb.b9ll1gr.mongodb.net/StayHub?appName=StayHub";
 
 //Local Module
 const storeRouter = require("./routes/storeRouter")
