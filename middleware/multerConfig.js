@@ -11,13 +11,15 @@ const randomString = (length) => {
   return result;
 }
 
+const path = require('path');
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Check which field is being uploaded to choose folder
     if (file.fieldname === 'rulesDocument') {
-      cb(null, 'rules/');
+      cb(null, path.join(__dirname, '..', 'rules'));
     } else {
-      cb(null, 'uploads/');
+      cb(null, path.join(__dirname, '..', 'uploads'));
     }
   },
   filename: (req, file, cb) => {

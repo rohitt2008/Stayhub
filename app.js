@@ -1,6 +1,21 @@
 // Core Module
 require('dotenv').config();
 const path = require('path');
+const fs = require('fs');
+
+// Ensure upload directories exist
+const uploadsDir = path.join(__dirname, 'uploads');
+const rulesDir = path.join(__dirname, 'rules');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+  console.log('Created uploads directory');
+}
+
+if (!fs.existsSync(rulesDir)) {
+  fs.mkdirSync(rulesDir);
+  console.log('Created rules directory');
+}
 
 // External Module
 const express = require('express');
