@@ -22,7 +22,16 @@ const express = require('express');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const multer = require('multer');
-const DB_PATH = process.env.MONGO_URI;
+const DB_PATH = process.env.MONGO_URI || process.env.MONGODB_URI;
+
+if (!DB_PATH) {
+  console.error("=============================================================");
+  console.error("FATAL ERROR: Database connection string is missing!");
+  console.error("Please ensure either MONGO_URI or MONGODB_URI is set");
+  console.error("in your Render dashboard environment variables.");
+  console.error("=============================================================");
+  process.exit(1);
+}
 
 //Local Module
 const storeRouter = require("./routes/storeRouter")
