@@ -24,6 +24,11 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const multer = require('multer');
 const DB_PATH = process.env.MONGO_URI || process.env.MONGODB_URI;
 
+// Diagnostic log to see exactly what Render is passing
+console.log("Diagnostic - Available Env Keys on Server:", Object.keys(process.env).filter(key => {
+  return !key.startsWith("npm_") && !key.startsWith("NVM_") && !key.startsWith("rvm_") && !key.startsWith("GEM_");
+}));
+
 if (!DB_PATH) {
   console.error("=============================================================");
   console.error("FATAL ERROR: Database connection string is missing!");
