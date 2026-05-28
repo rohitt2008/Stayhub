@@ -76,7 +76,10 @@ exports.postAddHome = (req, res, next) => {
       console.log("Home Saved with rules:", rulesFileName);
       res.redirect("/host/host-home-list");
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      next(err);
+    });
 };
 
 const path = require('path');
