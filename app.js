@@ -22,7 +22,7 @@ const express = require('express');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const multer = require('multer');
-const DB_PATH = "mongodb+srv://root:root@airbnb.b9ll1gr.mongodb.net/StayHub?appName=StayHub";
+const DB_PATH = process.env.MONGO_URI;
 
 //Local Module
 const storeRouter = require("./routes/storeRouter")
